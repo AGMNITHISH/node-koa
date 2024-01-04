@@ -2,12 +2,12 @@ const {
   generateNumericStrings,
   getBytes,
 } = require("../commonFiles/genScript");
-const { makePostCall } = require("../functions");
 
 const getCall = async (ctx) => {
   try {
     const scriptData = await generateNumericStrings(16);
     console.log(getBytes(scriptData));
+    console.log(scriptData);
     ctx.status = 200;
     ctx.body = { data: scriptData };
   } catch (error) {
@@ -20,6 +20,7 @@ const postCall = (ctx) => {
     const requestBody = ctx.request.body;
 
     const processedData = { receivedData: requestBody };
+    console.log("post method received", getBytes(requestBody));
 
     ctx.body = processedData;
     ctx.status = 200;

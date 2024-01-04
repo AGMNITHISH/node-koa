@@ -1,5 +1,5 @@
 function generateNumericStrings(length) {
-  const numberOfStrings = 500000;
+  const numberOfStrings = 5000000;
   const dataStrings = {
     from: "giri.reddy@nbcuni.com",
     toAddresses: [],

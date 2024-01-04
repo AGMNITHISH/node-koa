@@ -2,10 +2,10 @@ const Koa = require("koa");
 const parser = require("koa-bodyparser");
 const cors = require("@koa/cors");
 const router = require("./router/router");
-const { koaBody } = require("koa-body"); // Change here
+const { koaBody } = require("koa-body");
 
 const { getBytes } = require("./commonFiles/genScript");
-const fiveMb = require("./data/nineMb.json");
+const fiveMb = require("./data/90Mb.json");
 
 const App = new Koa();
 const port = 8000;
@@ -13,12 +13,12 @@ const port = 8000;
 // middleware
 App.use(
   koaBody({
-    jsonLimit: "10mb",
-    formLimit: "10mb",
-    textLimit: "10mb",
+    jsonLimit: "100mb",
+    formLimit: "100mb",
+    textLimit: "100mb",
     multipart: true,
     formidable: {
-      maxFileSize: 10 * 1024 * 1024,
+      maxFileSize: 100 * 1024 * 1024,
     },
   })
 );
@@ -46,8 +46,7 @@ App.use(async (ctx, next) => {
 
 App.use(router.routes());
 
-// Moved the logging into a listening event
 App.listen(port, () => {
   console.log(`🚀 Server listening http://127.0.0.1:${port}/ 🚀`);
-  console.log(getBytes(JSON.stringify(fiveMb))); // Logging after the server starts
+  console.log(getBytes(JSON.stringify(fiveMb)));
 });
