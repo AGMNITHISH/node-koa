@@ -6,6 +6,16 @@ const { koaBody } = require("koa-body");
 
 const { getBytes } = require("./commonFiles/genScript");
 const fiveMb = require("./data/90Mb.json");
+const {
+  listCreation,
+  getAllList,
+  getlistById,
+} = require("./sailthru/sailthru");
+const { importUsersIntoList } = require("./sailthru/job.Functions");
+const {
+  blastApi,
+  getBlastAPiStatus,
+} = require("./sailthru/blastFlow.Functiuons");
 
 const App = new Koa();
 const port = 8000;
@@ -29,6 +39,9 @@ App.use(
     credentials: true,
   })
 );
+
+//sailthru api calls:
+console.log("list result", getBlastAPiStatus());
 
 App.use(async (ctx, next) => {
   try {
